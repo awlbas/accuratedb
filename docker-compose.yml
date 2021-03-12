@@ -1,0 +1,19 @@
+version: "3.7"
+services:
+  firebird: 
+    image: jacobalberty/firebird:v2.5.9-sc
+    ports: 
+      - 3050:3050
+    working_dir: /src
+    volumes: 
+    - /database:/firebird/data
+    environment: 
+      ISC_PASSWORD: password
+
+  php:
+    image: php:7.2.33-apache
+    # command: sh -c "apt-get update && apt-get install -y firebird-dev && /usr/local/bin/docker-php-ext-install pdo_firebird"
+    ports:
+      - 8080:80
+    volumes: 
+      - ./src:/var/www/html
